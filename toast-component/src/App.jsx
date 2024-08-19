@@ -1,15 +1,27 @@
 import "./App.css";
-import Notification from "./components/notification";
+
 import useNotification from "./hooks/use-notification";
 
 function App() {
   //custom hook -useNotification(position)
 
-  const {} = useNotification("top-right");
+  const { NotificationComponent, triggerNotification } =
+    useNotification("top-right");
 
   return (
     <div>
-      <button>Trigger Success</button>
+      <button
+        onClick={() => {
+          triggerNotification({
+            type: "success",
+            message: "File sent successfuly",
+            duration: 3000,
+          });
+        }}
+      >
+        Trigger Success
+      </button>
+      {NotificationComponent}
     </div>
   );
 }

@@ -2,20 +2,22 @@ import { useState } from "react";
 import Notification from "../components/notification";
 
 const useNotification = (position = "top-right") => {
-
   const [notification, setNotification] = useState(null);
+  let timer;
 
-  const triggerNotification=(notificationProps)=>{
-    setNotification(notificationProps)
-setTimeout(() => {
-setNotification(null)
-}, notificationProps.duration);
-}
+  const triggerNotification = (notificationProps) => {
+    clearTimeout(timer);
+    setNotification(notificationProps);
+    timer = setTimeout(() => {
+      setNotification(null);
+    }, notificationProps.duration);
+  };
 
-  const NotificationComponents=notification?(
-    <div>
-        <Notification {...notification}/>
-        </div>
-  )
+  const NotificationComponent = notification ? (
+    <div className={`${position}`}>
+      <Notification {...notification} />
+    </div>
+  ) : null;
+  return { NotificationComponent, triggerNotification };
 };
 export default useNotification;
