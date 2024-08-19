@@ -5,16 +5,15 @@ import {
   AiOutlineInfoCircle,
   AiOutlineWarning,
 } from "react-icons/ai";
+import PropTypes from "prop-types";
 
 import "./notification.css";
 
-const iconStyles = { marginRight: "10px" };
-
 const icons = {
-  success: <AiOutlineCheckCircle style={iconStyles} />,
-  info: <AiOutlineInfoCircle style={iconStyles} />,
-  warning: <AiOutlineWarning style={iconStyles} />,
-  error: <AiOutlineCloseCircle style={iconStyles} />,
+  success: <AiOutlineCheckCircle className="icon" />,
+  info: <AiOutlineInfoCircle className="icon" />,
+  warning: <AiOutlineWarning className="icon" />,
+  error: <AiOutlineCloseCircle className="icon" />,
 };
 
 const Notification = ({ type = "info", message, onClose = () => {} }) => {
@@ -32,6 +31,13 @@ const Notification = ({ type = "info", message, onClose = () => {} }) => {
       />
     </div>
   );
+};
+
+// PropTypes ile tip kontrolü
+Notification.propTypes = {
+  type: PropTypes.oneOf(["success", "info", "warning", "error"]),
+  message: PropTypes.string.isRequired,
+  onClose: PropTypes.func,
 };
 
 export default Notification;

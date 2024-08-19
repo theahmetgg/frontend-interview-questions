@@ -21,6 +21,17 @@ function App() {
       >
         Trigger Success
       </button>
+      <button
+        onClick={() => {
+          triggerNotification({
+            type: "error",
+            message: "File sent successfuly",
+            duration: 3000,
+          });
+        }}
+      >
+        Trigger Error
+      </button>
       {NotificationComponent}
     </div>
   );
